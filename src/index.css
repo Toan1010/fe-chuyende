@@ -8,12 +8,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
 }
 
 /* Đặt kích thước thanh cuộn */
 ::-webkit-scrollbar {
-  width: 2px; /* Độ rộng của thanh cuộn dọc */
+  width: 1px; /* Độ rộng của thanh cuộn dọc */
   height: 2px; /* Độ rộng của thanh cuộn ngang */
 }
 

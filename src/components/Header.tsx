@@ -9,13 +9,15 @@ export default function Header() {
   const refreshToken: string = authenticate();
   const isLogin = Boolean(refreshToken);
   const handleLogout = async () => {
+    console.log("logout");
+    clearAuthTokens();
+    
     try {
       await axios.post(`${api_url}/auth/logout`, { refreshToken });
       alert("Đăng xuất thành công!");
     } catch (error: any) {
       alert("Có lỗi xảy ra!");
     } finally {
-      clearAuthTokens();
       navigate("/auth/login");
     }
   };

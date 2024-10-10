@@ -8,6 +8,7 @@ import React, {
 import axiosInstance from "../configs/axiosConfigs";
 import { api_url } from "../configs/environments";
 import LoadingSpinner from "../components/Loading"; // Đảm bảo bạn đã tạo component LoadingSpinner
+import { useAuthCookies } from "./useToken";
 
 export interface User {
   fullName: string;
@@ -29,6 +30,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const { clearAuthTokens } = useAuthCookies();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true); // Trạng thái loading
 
@@ -38,13 +40,14 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
       setUser(response.data.data);
     } catch (error) {
       console.error("Failed to fetch user info", error);
+      clearAuthTokens();
     } finally {
       setLoading(false); // Đảm bảo set loading là false sau khi fetch xong
     }
   };
 
   useEffect(() => {
-    fetchUserInfo(); 
+    fetchUserInfo();
   }, []);
 
   if (loading) {

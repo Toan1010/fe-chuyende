@@ -5,6 +5,7 @@ import "../../css/statusButton.css";
 // @ts-ignore
 import { EyeIcon, TrashIcon } from "@heroicons/react/solid";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function StudentRow({
   student,
@@ -64,7 +65,7 @@ export default function StudentRow({
             onChange={() => handleStatusChange(student.id)}
             className="toggle-checkbox"
           />
-          <span className="ml-2 text-sm">{status ? "Active" : "Inactive"}</span>
+          <span className="ml-2 text-sm">Đã kích hoạt</span>
         </label>
       </td>
       <td className="px-4 py-2 border text-center">
@@ -72,9 +73,9 @@ export default function StudentRow({
       </td>
       <td className="px-4 py-2 border text-center">
         <div className="flex justify-center space-x-2">
-          <button className="text-blue-500 hover:text-blue-700">
+          <Link to={`/student/${student.id}`} className="text-blue-500 hover:text-blue-700">
             <EyeIcon className="h-5 w-5" />
-          </button>
+          </Link>
           <button
             className="text-red-500 hover:text-red-700"
             onClick={() => deleteStudent(student.id)}

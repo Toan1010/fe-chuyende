@@ -7,6 +7,3 @@ export interface Student {
   createdAt: Date;
 }
 
-export interface AddFormProps {
-  onClose: () => void;
-}

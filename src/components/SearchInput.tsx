@@ -17,7 +17,7 @@ const SearchAndLimit: React.FC<SearchAndLimitProps> = ({
     <div className="mb-4 flex gap-2">
       <input
         type="text"
-        placeholder="Tìm kiếm sinh viên theo tên ..."
+        placeholder="Tìm kiếm  ..."
         className="border p-2 rounded min-w-64"
         value={search}
         onChange={(e) => setSearch(e.target.value)}

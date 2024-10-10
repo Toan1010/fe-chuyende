@@ -16,7 +16,11 @@ const renewToken = async () => {
     if (refreshToken) {
       const response = await axios.post(`${api_url}/auth/refresh`, {
         refreshToken,
-      }); // Gọi API để làm mới token
+      }); 
+      console.log(refreshToken);
+      console.log(response);
+      
+      // Gọi API để làm mới token
       const { accessToken, refreshToken: newRefreshToken } = response.data.data;
       // Giả sử API trả về accessToken và refreshToken mới
       console.log(newRefreshToken);
@@ -33,7 +37,6 @@ const renewToken = async () => {
     }
     return null; // Không có refreshToken
   } catch (error) {
-    console.error("Error renewing token:", error);
     cookies.remove("refreshToken");
     return null; // Nếu có lỗi xảy ra
   }

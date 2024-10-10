@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AddFormProps } from "../../interfaces/Student.interface";
+import { AddFormProps } from "../../interfaces/Form.interface";
 import axiosInstance from "../../configs/axiosConfigs";
 
 export default function AddStudentForm({ onClose }: AddFormProps) {
