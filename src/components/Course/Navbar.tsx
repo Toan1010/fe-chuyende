@@ -37,11 +37,11 @@ const CourseNavbar: React.FC<CourseNavbarProps> = ({ onTabSelect }) => {
         </li>
         <li
           className={`cursor-pointer pb-2 transition-all ${
-            activeTab === "materials"
+            activeTab === "docs"
               ? "border-b-2 border-blue-500 text-blue-500"
               : "text-gray-500 hover:text-blue-500"
           }`}
-          onClick={() => handleTabClick("materials")}
+          onClick={() => handleTabClick("docs")}
         >
           Tài liệu
         </li>

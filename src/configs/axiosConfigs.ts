@@ -5,7 +5,7 @@ import { api_url } from "./environments";
 const cookies = new Cookies();
 
 const axiosInstance = axios.create({
-  baseURL: api_url, // Thay đổi thành URL API của bạn
+  baseURL: `${api_url}/api`, // Thay đổi thành URL API của bạn
   timeout: 10000, // Thời gian timeout cho yêu cầu
 });
 
@@ -14,7 +14,7 @@ const renewToken = async () => {
   try {
     const refreshToken = cookies.get("refreshToken"); // Lấy refreshToken từ cookie
     if (refreshToken) {
-      const response = await axios.post(`${api_url}/auth/refresh`, {
+      const response = await axios.post(`${api_url}/api/auth/refresh`, {
         refreshToken,
       }); 
       console.log(refreshToken);

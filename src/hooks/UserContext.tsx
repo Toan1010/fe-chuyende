@@ -36,11 +36,11 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axiosInstance.get(`${api_url}/admin/my-info`);
+      const response = await axiosInstance.get(`${api_url}/api/admin/my-info`);
       setUser(response.data.data);
     } catch (error) {
-      console.error("Failed to fetch user info", error);
       clearAuthTokens();
+      console.error("Failed to fetch user info", error);
     } finally {
       setLoading(false); // Đảm bảo set loading là false sau khi fetch xong
     }
@@ -48,6 +48,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     fetchUserInfo();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (loading) {

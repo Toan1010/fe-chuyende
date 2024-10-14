@@ -7,6 +7,7 @@ import CourseInfo from "../../../components/Course/CourseInfo";
 import CourseNavbar from "../../../components/Course/Navbar";
 import LessonList from "../../../components/Lesson/LessonList"; // Import LessonList
 import ExamList from "../../../components/Exam/ExamList"; // Import ExamList
+import DocumentList from "../../../components/Document/DocumentList";
 
 const CourseDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -52,6 +53,7 @@ const CourseDetail: React.FC = () => {
           <div className="mt-6">
             {activeTab === "lessons" && <LessonList course={course} />}
             {activeTab === "exams" && <ExamList course={course} />}
+            {activeTab === "docs" && <DocumentList course={course} />}
           </div>
         </div>
       ) : (

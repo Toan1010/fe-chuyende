@@ -29,7 +29,7 @@ export default function Login() {
 
   const loginUser = async (email: string, password: string) => {
     try {
-      const response = await axios.post(`${api_url}/auth/admin/`, {
+      const response = await axios.post(`${api_url}/api/auth/admin/`, {
         email,
         password,
       });
