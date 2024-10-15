@@ -49,6 +49,7 @@ export default function EditExamForm({ onClose, exam }: EditExamFormProps) {
       );
       alert(response.data.data); // Hiển thị thông báo từ server
       onClose();
+      window.location.reload();
     } catch (error: any) {
       alert(error.response.data.error);
     }

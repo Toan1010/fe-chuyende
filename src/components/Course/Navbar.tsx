@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface CourseNavbarProps {
   onTabSelect: (tab: string) => void;
@@ -7,9 +7,18 @@ interface CourseNavbarProps {
 const CourseNavbar: React.FC<CourseNavbarProps> = ({ onTabSelect }) => {
   const [activeTab, setActiveTab] = useState<string>("lessons");
 
+  useEffect(() => {
+    // Đọc giá trị activeTab từ localStorage nếu có
+    const savedTab = localStorage.getItem("activeTab") || "lessons";
+    setActiveTab(savedTab);
+    onTabSelect(savedTab); // Gọi onTabSelect với tab từ localStorage
+  }, [onTabSelect]);
+
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
     onTabSelect(tab);
+    // Lưu tab hiện tại vào localStorage
+    localStorage.setItem("activeTab", tab);
   };
 
   return (

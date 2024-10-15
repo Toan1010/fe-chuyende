@@ -5,9 +5,10 @@ import axiosInstance from "../../../configs/axiosConfigs";
 import LoadingSpinner from "../../../components/Loading";
 import CourseInfo from "../../../components/Course/CourseInfo";
 import CourseNavbar from "../../../components/Course/Navbar";
-import LessonList from "../../../components/Lesson/LessonList"; // Import LessonList
-import ExamList from "../../../components/Exam/ExamList"; // Import ExamList
+import LessonList from "../../../components/Lesson/LessonList";
+import ExamList from "../../../components/Exam/ExamList";
 import DocumentList from "../../../components/Document/DocumentList";
+import StudentList from "../../../components/Student/CourseP/StudentList";
 
 const CourseDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -17,6 +18,9 @@ const CourseDetail: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("lessons");
 
   useEffect(() => {
+    // Lấy tab mặc định từ localStorage nếu có, không thì mặc định là "lessons"
+    const defaultTab = localStorage.getItem("activeTab") || "lessons";
+
     const fetchCourse = async () => {
       try {
         setLoading(true);
@@ -29,11 +33,15 @@ const CourseDetail: React.FC = () => {
       }
     };
 
+    // Set lại tab đang chọn từ localStorage
+    setActiveTab(defaultTab);
     fetchCourse();
   }, [slug]);
 
+  // Hàm chuyển đổi tab và lưu vào localStorage
   const handleTabSelect = (tab: string) => {
     setActiveTab(tab);
+    localStorage.setItem("activeTab", tab); // Lưu tab đang chọn vào localStorage
   };
 
   return (
@@ -54,6 +62,7 @@ const CourseDetail: React.FC = () => {
             {activeTab === "lessons" && <LessonList course={course} />}
             {activeTab === "exams" && <ExamList course={course} />}
             {activeTab === "docs" && <DocumentList course={course} />}
+            {activeTab === "students" && <StudentList course={course} />}
           </div>
         </div>
       ) : (

@@ -65,7 +65,7 @@ export default function EditLessonForm({
       console.log(response);
 
       alert(response.data.data); // Hiển thị thông báo từ server
-      onClose();
+      window.location.reload();
     } catch (error: any) {
       alert(error.response.data.error);
     }
