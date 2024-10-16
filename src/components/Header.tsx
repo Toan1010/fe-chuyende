@@ -11,7 +11,7 @@ export default function Header() {
   const handleLogout = async () => {
     console.log("logout");
     clearAuthTokens();
-    
+
     try {
       await axios.post(`${api_url}/api/auth/logout`, { refreshToken });
       alert("Đăng xuất thành công!");
@@ -29,7 +29,7 @@ export default function Header() {
       {isLogin ? (
         <div className="flex items-center">
           <button
-            onClick={()=>handleLogout}
+            onClick={() => handleLogout()}
             className="bg-red-600 text-white py-2 px-4 rounded hover:bg-red-400"
           >
             Logout
