@@ -34,13 +34,11 @@ export default function Login() {
         password,
       });
       const { accessToken, refreshToken } = response.data.data;
-      alert("Login successful!");
       setAuthTokens(accessToken, refreshToken);
       await fetchUserInfo();
       navigate("/");
     } catch (error: any) {
       setError(error.response.data.error);
-      console.log("Login failed", error.message);
     }
   };
 

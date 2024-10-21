@@ -14,7 +14,6 @@ export default function Header() {
 
     try {
       await axios.post(`${api_url}/api/auth/logout`, { refreshToken });
-      alert("Đăng xuất thành công!");
     } catch (error: any) {
       alert("Có lỗi xảy ra!");
     } finally {

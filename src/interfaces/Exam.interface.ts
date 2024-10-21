@@ -7,6 +7,9 @@ export interface Exam {
   numberQuestion: number;
   reDoTime: number;
   submitTime: number;
+  course: string;
+  createdAt: Date;
+  studentDid: number;
 }
 
 export interface ExamListProps {

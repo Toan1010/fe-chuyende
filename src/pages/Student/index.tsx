@@ -51,7 +51,7 @@ export default function Page() {
 
   useEffect(() => {
     fetchStudents();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, page, search]);
 
   const handlePageChange = (newPage: number) => {

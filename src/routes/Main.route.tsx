@@ -6,10 +6,12 @@ import Home from "../pages/Home";
 import AdminDashboard from "../pages/Admin";
 import StudentDashboard from "../pages/Student";
 import CourseDashboard from "../pages/Course";
+import ExamDashboard from "../pages/Exam";
+import MyProfile from "../pages/MyProfile";
 import SurveyDashboard from "../pages/Survey";
 import CourseDetail from "../pages/Course/DetailCourse.tsx";
 import DetailStudent from "../pages/Student/DetailStudent";
-import DetailSurvey from "../pages/Survey/DetailSurvey"
+import DetailSurvey from "../pages/Survey/DetailSurvey";
 
 const MainRoutes: React.FC = () => {
   const { getRefreshToken: authenticate } = useAuthCookies();
@@ -25,10 +27,11 @@ const MainRoutes: React.FC = () => {
         <Route path="/student/:id" element={<DetailStudent />} />
         <Route path="/course" element={<CourseDashboard />} />
         <Route path="/course/:slug" element={<CourseDetail />} />
-        <Route path="/exam" element={<AdminDashboard />} />
+        <Route path="/exam" element={<ExamDashboard />} />
         <Route path="/survey" element={<SurveyDashboard />} />
         <Route path="/survey/:slug" element={<DetailSurvey />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/profile" element={<MyProfile />} />
         <Route path="/*" element={<Navigate to="/" replace />} />{" "}
       </Routes>
     </MainLayout>
