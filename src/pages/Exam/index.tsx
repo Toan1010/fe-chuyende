@@ -5,6 +5,9 @@ import SearchAndLimit from "../../components/SearchInput";
 import { Exam } from "../../interfaces/Exam.interface";
 import axiosInstance from "../../configs/axiosConfigs";
 import LoadingSpinner from "../../components/Loading";
+import IndexRow from "../../components/Exam/IndexRow";
+import AddExamFormWithCourseSelection from "../../components/Exam/IndexAddForm";
+import EditExamForm from "../../components/Exam/EditExamForm";
 
 export default function Page() {
   const [exams, setExam] = useState<Exam[]>([]);
@@ -18,9 +21,15 @@ export default function Page() {
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState<JSX.Element | null>(null);
 
-  const handleAddSurvey = () => {
-    setModalTitle("Thêm bài khảo sát");
-    // setModalContent(<AddSurveyForm />);
+  const handleAddExam = () => {
+    setModalTitle("Thêm bài thi");
+    setModalContent(<AddExamFormWithCourseSelection onClose={closeModal} />);
+    setIsModalOpen(true);
+  };
+
+  const handleEditExam = (exam: Exam) => {
+    setModalTitle("Sửa thông tin bài thi");
+    setModalContent(<EditExamForm exam={exam} onClose={closeModal} />);
     setIsModalOpen(true);
   };
 
@@ -34,12 +43,12 @@ export default function Page() {
           key_name: search,
         },
       });
-      setExam(response.data.data.surveys);
+      setExam(response.data.data.exams);
       setTotalExam(response.data.data.count);
       let ttPage = Math.ceil(response.data.data.count / limit);
       setTotalPages(ttPage);
     } catch (error) {
-      console.error("Error fetching Surveys:", error);
+      console.error("Error fetching Exams:", error);
     } finally {
       setLoading(false);
     }
@@ -69,6 +78,14 @@ export default function Page() {
           limit={limit}
           setLimit={setLimit}
         />
+        <div className="mb-4 flex gap-2">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={handleAddExam}
+          >
+            Thêm bài thi
+          </button>
+        </div>
       </div>
 
       <Modal isOpen={isModalOpen} onClose={closeModal} title={modalTitle}>
@@ -97,9 +114,13 @@ export default function Page() {
                 </tr>
               </thead>
               <tbody>
-                {/* {surveys.map((survey) => (
-                  <SurveyRow key={survey.id} survey={survey} />
-                ))} */}
+                {exams.map((exam) => (
+                  <IndexRow
+                    key={exam.id}
+                    exam={exam}
+                    handleEdit={handleEditExam}
+                  />
+                ))}
               </tbody>
             </table>
           </div>

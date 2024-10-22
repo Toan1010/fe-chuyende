@@ -4,12 +4,19 @@ import { Student } from "../../../interfaces/Student.interface";
 import StudentInfo from "../../../components/Student/StudentInfo";
 import axiosInstance from "../../../configs/axiosConfigs";
 import LoadingSpinner from "../../../components/Loading";
+import StudentNavbar from "../../../components/Student/StudentNavbar";
 
 const DetailStudent: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Lấy id từ URL
   const [student, setStudent] = useState<Student | null>(null); // State lưu thông tin sinh viên
   const [loading, setLoading] = useState<boolean>(true); // State loading
+  const [activeTab, setActiveTab] = useState<string>("questions");
   const [error, setError] = useState<string | null>(null); // State error
+
+  const handleTabSelect = (tab: string) => {
+    setActiveTab(tab);
+    localStorage.setItem("studentActiveTab", tab); // Lưu tab đang chọn vào localStorage
+  };
 
   useEffect(() => {
     const fetchStudent = async () => {
@@ -25,7 +32,7 @@ const DetailStudent: React.FC = () => {
     };
 
     fetchStudent();
-  }, [id]); 
+  }, [id]);
 
   return (
     <div className="flex-1 flex-col p-4">
@@ -35,13 +42,14 @@ const DetailStudent: React.FC = () => {
           <LoadingSpinner />
         </div>
       ) : error ? (
-        <div className="text-red-500">{error}</div> 
+        <div className="text-red-500">{error}</div>
       ) : student ? (
         <div className="relative">
           <StudentInfo student={student} />
+          <StudentNavbar onTabSelect={handleTabSelect} />
         </div>
       ) : (
-        <div>Không tìm thấy sinh viên.</div> 
+        <div>Không tìm thấy sinh viên.</div>
       )}
     </div>
   );

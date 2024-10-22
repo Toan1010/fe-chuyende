@@ -12,6 +12,7 @@ import SurveyDashboard from "../pages/Survey";
 import CourseDetail from "../pages/Course/DetailCourse.tsx";
 import DetailStudent from "../pages/Student/DetailStudent";
 import DetailSurvey from "../pages/Survey/DetailSurvey";
+import ExamDetail from "../pages/Exam/DetailExam";
 
 const MainRoutes: React.FC = () => {
   const { getRefreshToken: authenticate } = useAuthCookies();
@@ -28,6 +29,7 @@ const MainRoutes: React.FC = () => {
         <Route path="/course" element={<CourseDashboard />} />
         <Route path="/course/:slug" element={<CourseDetail />} />
         <Route path="/exam" element={<ExamDashboard />} />
+        <Route path="/exam/:id" element={<ExamDetail />} />
         <Route path="/survey" element={<SurveyDashboard />} />
         <Route path="/survey/:slug" element={<DetailSurvey />} />
         <Route path="/admin" element={<AdminDashboard />} />

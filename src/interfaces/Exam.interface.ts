@@ -8,8 +8,17 @@ export interface Exam {
   reDoTime: number;
   submitTime: number;
   course: string;
-  createdAt: Date;
+  createdAt: string;
+  updatedAt: string;
   studentDid: number;
+}
+
+export interface ExamQuestion {
+  id: string;
+  name: string;
+  type: string;
+  choice: string[];
+  correctAns: string[];
 }
 
 export interface ExamListProps {

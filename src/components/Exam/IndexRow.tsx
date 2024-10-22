@@ -3,7 +3,7 @@ import axiosInstance from "../../configs/axiosConfigs";
 import { Exam } from "../../interfaces/Exam.interface";
 // @ts-ignore
 import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/solid";
-export default function ExamRow({
+export default function IndexRow({
   exam,
   handleEdit,
 }: {
@@ -19,6 +19,7 @@ export default function ExamRow({
       }
       const response = await axiosInstance.delete(`/exam/delete/${id}`);
       alert(response.data.data);
+      window.location.reload();
     } catch (error: any) {
       alert(error.response.data.error);
     }
@@ -28,11 +29,9 @@ export default function ExamRow({
     <tr key={exam.id} className=" overflow-hidden">
       <td className="px-4 py-1 border text-center  h-7">{exam.id}</td>
       <td className="px-4 py-1 border h-7">{exam.name}</td>
-      <td className="px-4 py-1 border h-7">{exam.numberQuestion}</td>
-      <td className="px-4 py-1 border h-7">{exam.submitTime}</td>
-      <td className="px-4 py-1 border h-7">
-        {exam.reDoTime ? exam.reDoTime : "Vô số lần"}
-      </td>
+      <td className="px-4 py-1 border h-7">{exam.course}</td>
+      <td className="px-4 py-1 border h-7">{exam.studentDid}</td>
+      <td className="px-4 py-1 border h-7">{exam.createdAt}</td>
       <td className="px-4 py-2 border text-center  h-7">
         <div className="flex justify-center space-x-2">
           <button className="text-blue-500 hover:text-blue-700">

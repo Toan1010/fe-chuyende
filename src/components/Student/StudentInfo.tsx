@@ -2,7 +2,7 @@ import { Student } from "../../interfaces/Student.interface";
 
 export default function StudentInfo({ student }: { student: Student }) {
   return (
-    <div className="flex items-center justify-between space-x-8 overflow-auto ">
+    <div className="flex items-center justify-between space-x-8 overflow-auto p-6 bg-white shadow-lg rounded-lg">
       <div className="flex items-center">
         <img
           src="https://images.rawpixel.com/image_png_800/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvam9iNjgwLTE2Ni1wLWwxZGJ1cTN2LnBuZw.png"

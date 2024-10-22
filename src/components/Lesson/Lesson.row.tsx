@@ -1,4 +1,5 @@
 import axiosInstance from "../../configs/axiosConfigs";
+import { api_url } from "../../configs/environments";
 import { Lesson } from "../../interfaces/Lesson.interface";
 // @ts-ignore
 import { PencilIcon, TrashIcon } from "@heroicons/react/solid";
@@ -9,6 +10,15 @@ export default function LessonRow({
   lesson: Lesson;
   handleEdit: (id: string) => void;
 }) {
+  const isValidUrl = (description: string) => {
+    try {
+      new URL(description); // Kiểm tra nếu description là một URL hợp lệ
+      return true;
+    } catch (_) {
+      return false;
+    }
+  };
+
   const handleDelete = async (id: string) => {
     try {
       // eslint-disable-next-line no-restricted-globals
@@ -37,10 +47,21 @@ export default function LessonRow({
 
       {/* Cột Mô tả (dài nhất) */}
       <td className="px-4 py-1 border w-5/12 h-7 overflow-y-auto text-ellipsis">
-        <div
-          className="h-7 overflow-hidden"
-          dangerouslySetInnerHTML={{ __html: lesson.description }}
-        >
+        <div className="h-7 overflow-hidden">
+          {isValidUrl(`${api_url}/videos/${lesson.context}`) ? (
+            // Nếu description là URL, render thẻ <a> để link tới video
+            <a
+              href={`${api_url}/videos/${lesson.context}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline"
+            >
+              <span dangerouslySetInnerHTML={{ __html: lesson.description }} />{" "}
+            </a>
+          ) : (
+            // Nếu description không phải là URL, hiển thị bình thường
+            <span dangerouslySetInnerHTML={{ __html: lesson.description }} />
+          )}
         </div>
       </td>
 

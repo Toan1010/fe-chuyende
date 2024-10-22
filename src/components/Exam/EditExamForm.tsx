@@ -2,7 +2,7 @@ import { useState } from "react";
 import { EditExamFormProps } from "../../interfaces/Form.interface";
 import axiosInstance from "../../configs/axiosConfigs";
 
-export default function EditExamForm({ onClose, exam }: EditExamFormProps) {
+export default function EditExamForm({ exam }: EditExamFormProps) {
   const [name, setName] = useState(exam.name);
   const [numberQuestion, setNumberQuestion] = useState(exam.numberQuestion); // Số lượng câu hỏi
   const [reDoTime, setReDoTime] = useState(exam.reDoTime); // Số lần làm lại
@@ -48,7 +48,6 @@ export default function EditExamForm({ onClose, exam }: EditExamFormProps) {
         formData
       );
       alert(response.data.data); // Hiển thị thông báo từ server
-      onClose();
       window.location.reload();
     } catch (error: any) {
       alert(error.response.data.error);
