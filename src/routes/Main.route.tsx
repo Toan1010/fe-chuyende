@@ -6,6 +6,7 @@ import Home from "../pages/Home";
 import AdminDashboard from "../pages/Admin";
 import StudentDashboard from "../pages/Student";
 import CourseDashboard from "../pages/Course";
+import TopicDashboard from "../pages/Topic";
 import ExamDashboard from "../pages/Exam";
 import MyProfile from "../pages/MyProfile";
 import SurveyDashboard from "../pages/Survey";
@@ -32,6 +33,7 @@ const MainRoutes: React.FC = () => {
         <Route path="/exam/:id" element={<ExamDetail />} />
         <Route path="/survey" element={<SurveyDashboard />} />
         <Route path="/survey/:slug" element={<DetailSurvey />} />
+        <Route path="/topic" element={<TopicDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/*" element={<Navigate to="/" replace />} />{" "}

@@ -1,4 +1,5 @@
 import { Course } from "./Course.interface";
+import { Student } from "./Student.interface";
 
 export interface Exam {
   id: string;
@@ -19,6 +20,14 @@ export interface ExamQuestion {
   type: string;
   choice: string[];
   correctAns: string[];
+}
+
+export interface ExamResult {
+  id: string;
+  student: Student;
+  correctAns: number;
+  createdAt: string;
+  submitAt: string;
 }
 
 export interface ExamListProps {

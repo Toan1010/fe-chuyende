@@ -58,6 +58,7 @@ export default function Page() {
     fetchExam();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, page, search]);
+  
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setPage(newPage);

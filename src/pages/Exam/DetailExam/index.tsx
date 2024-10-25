@@ -6,6 +6,7 @@ import LoadingSpinner from "../../../components/Loading";
 import ExamInfo from "../../../components/Exam/ExamInfo";
 import ExamNavbar from "../../../components/Exam/ExamNavbar";
 import QuestionList from "../../../components/Exam/ExamQuestion/QuestionList";
+import AttendList from "../../../components/Exam/AttendList/AttendList";
 
 export default function Page() {
   const { id } = useParams<{ id: string }>();
@@ -53,10 +54,7 @@ export default function Page() {
           <ExamNavbar onTabSelect={handleTabSelect} />
           <div className="mt-6">
             {activeTab === "questions" && id && <QuestionList id={id} />}
-            {activeTab === "students" && (
-              <></>
-              // <StudentListPaticipate slug={survey.slug} />
-            )}
+            {activeTab === "students" && id && <AttendList id={id} />}
           </div>
         </div>
       ) : (

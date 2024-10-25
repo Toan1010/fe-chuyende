@@ -23,13 +23,12 @@ const Sidebar = () => {
     { name: "Student", path: "/student", permission: "student_permission" },
     { name: "Course", path: "/course", permission: "course_permission" },
     { name: "Exam", path: "/exam", permission: "exam_permission" },
-    { name: "Survey", path: "/survey", roles: ["normal_admin", "super_admin"]  },
+    { name: "Survey", path: "/survey", roles: ["normal_admin", "super_admin"] },
+    { name: "Topic", path: "/topic", roles: ["super_admin"] },
     { name: "Admin", path: "/admin", roles: ["super_admin"] },
   ];
 
-  const settingsItems = [
-    { name: "Profile", path: "/profile" },
-  ];
+  const settingsItems = [{ name: "Profile", path: "/profile" }];
 
   const hasPermission = (item: any) => {
     if (!user) return false;

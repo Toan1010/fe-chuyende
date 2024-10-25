@@ -27,7 +27,9 @@ export default function ExamRow({
   return (
     <tr key={exam.id} className=" overflow-hidden">
       <td className="px-4 py-1 border text-center  h-7">{exam.id}</td>
-      <td className="px-4 py-1 border h-7">{exam.name}</td>
+      <td className="px-4 py-1 border h-7">
+        <Link to={`/exam/${exam.id}`}>{exam.name}</Link>
+      </td>
       <td className="px-4 py-1 border h-7">{exam.numberQuestion}</td>
       <td className="px-4 py-1 border h-7">{exam.submitTime}</td>
       <td className="px-4 py-1 border h-7">
