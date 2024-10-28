@@ -2,10 +2,6 @@ import { useState } from "react";
 import { useUser } from "../../hooks/UserContext";
 import axiosInstance from "../../configs/axiosConfigs";
 
-interface Permission {
-  id: number;
-  name: string;
-}
 
 export default function PersonalInfoForm() {
   const { user } = useUser() as any;
