@@ -5,6 +5,8 @@ import StudentInfo from "../../../components/Student/StudentInfo";
 import axiosInstance from "../../../configs/axiosConfigs";
 import LoadingSpinner from "../../../components/Loading";
 import StudentNavbar from "../../../components/Student/StudentNavbar";
+import CourseStudent from "../../../components/Student/CoursePart";
+import ExamStudent from "../../../components/Student/ExamPart";
 
 const DetailStudent: React.FC = () => {
   const { id } = useParams<{ id: string }>(); // Lấy id từ URL
@@ -47,6 +49,10 @@ const DetailStudent: React.FC = () => {
         <div className="relative">
           <StudentInfo student={student} />
           <StudentNavbar onTabSelect={handleTabSelect} />
+          <div className="mt-6">
+            {activeTab === "courses" && id && <CourseStudent id={id} />}
+            {activeTab === "exams" && id && <ExamStudent id={id} />}
+          </div>
         </div>
       ) : (
         <div>Không tìm thấy sinh viên.</div>

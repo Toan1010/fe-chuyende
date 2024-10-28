@@ -56,7 +56,7 @@ const CourseDetail: React.FC = () => {
       ) : course ? (
         <div className="relative">
           <CourseInfo course={course} />
-          <CourseNavbar onTabSelect={handleTabSelect} />
+          <CourseNavbar  onTabSelect={handleTabSelect} />
 
           <div className="mt-6">
             {activeTab === "lessons" && <LessonList course={course} />}

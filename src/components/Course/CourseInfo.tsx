@@ -44,7 +44,7 @@ export default function CourseInfo({ course }: { course: Course }) {
         </div>
         <div className="flex gap-3">
           <span className="font-semibold text-gray-700">Chủ đề :</span>
-          <span className="text-gray-700">{course.topic}</span>
+          <span className="text-gray-700">{course.topic.name}</span>
         </div>
         <div className="flex gap-3">
           <span className="font-semibold text-gray-700">

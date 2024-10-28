@@ -17,6 +17,7 @@ export default function CourseRow({
   onDelete: (id: string) => void; // Nhận hàm callback để xóa sinh viên từ component cha
 }) {
   const [status, setStatus] = useState<boolean>(course.type);
+  console.log(course);
 
   const handleStatusChange = async (id: string) => {
     try {
@@ -58,7 +59,7 @@ export default function CourseRow({
         />
       </td>
       <td className="px-4 py-1 border text-left">{course.name}</td>
-      <td className="px-4 py-1 border text-left">{course.topic}</td>
+      <td className="px-4 py-1 border text-left">{course.topic.name}</td>
       <td className="px-4 py-1 border text-center">
         <label className="flex items-center">
           <input

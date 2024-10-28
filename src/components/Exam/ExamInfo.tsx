@@ -17,8 +17,8 @@ export default function ExamInfo({ exam }: { exam: Exam }) {
       {/* Phần thông tin bổ sung */}
       <div className="mt-6 grid grid-cols-3 gap-4">
         <div className="flex gap-3">
-          <span className="font-semibold text-gray-700">Khóa học :</span>
-          <span>{exam.course}</span>
+          <span className="font-semibold text-gray-700">Chủ đề :</span>
+          <span>{exam.topic.name}</span>
         </div>
         <div className="flex gap-3">
           <span className="font-semibold text-gray-700">Ngày tạo :</span>
@@ -44,7 +44,9 @@ export default function ExamInfo({ exam }: { exam: Exam }) {
           <span className="font-semibold text-gray-700">
             Số lần được làm lại :
           </span>
-          <span className="text-gray-700">{exam.reDoTime}</span>
+          <span className="text-gray-700">
+            {exam.reDoTime === 0 ? "Vô số lần" : exam.reDoTime}
+          </span>
         </div>
       </div>
     </div>

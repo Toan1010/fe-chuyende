@@ -78,7 +78,7 @@ export default function Page() {
 
   return (
     <div className="flex flex-1 flex-col p-4">
-      <h1 className="text-2xl font-bold mb-4">Danh sách Sinh viên</h1>
+      <h1 className="text-2xl font-bold mb-4">Danh sách Khóa học</h1>
 
       <div className="flex items-center justify-between">
         <SearchAndLimit

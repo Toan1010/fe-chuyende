@@ -14,6 +14,7 @@ import CourseDetail from "../pages/Course/DetailCourse.tsx";
 import DetailStudent from "../pages/Student/DetailStudent";
 import DetailSurvey from "../pages/Survey/DetailSurvey";
 import ExamDetail from "../pages/Exam/DetailExam";
+import DetailTopic from "../pages/Topic/DetailTopic";
 
 const MainRoutes: React.FC = () => {
   const { getRefreshToken: authenticate } = useAuthCookies();
@@ -34,6 +35,7 @@ const MainRoutes: React.FC = () => {
         <Route path="/survey" element={<SurveyDashboard />} />
         <Route path="/survey/:slug" element={<DetailSurvey />} />
         <Route path="/topic" element={<TopicDashboard />} />
+        <Route path="/topic/:slug" element={<DetailTopic />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/profile" element={<MyProfile />} />
         <Route path="/*" element={<Navigate to="/" replace />} />{" "}

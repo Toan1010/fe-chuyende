@@ -1,16 +1,43 @@
-import { useState } from "react";
-import { EditExamFormProps } from "../../interfaces/Form.interface";
+/* eslint-disable no-restricted-globals */
+import React, { useEffect, useState } from "react";
 import axiosInstance from "../../configs/axiosConfigs";
+import { EditExamFormProps } from "../../interfaces/Form.interface";
+import { Topic } from "../../interfaces/Topic.interface";
 
 export default function EditExamForm({ exam }: EditExamFormProps) {
-  const [name, setName] = useState(exam.name);
-  const [numberQuestion, setNumberQuestion] = useState(exam.numberQuestion); // Số lượng câu hỏi
-  const [reDoTime, setReDoTime] = useState(exam.reDoTime); // Số lần làm lại
-  const [submitTime, setSubmitTime] = useState(exam.submitTime); // Thời gian làm bài (min là 10)
-  const [passingQuestion, setPassingQuestion] = useState(exam.passingQuestion); // Số câu hỏi cần đúng để qua bài
+  const [name, setName] = useState(exam.name || "");
+  const [numberQuestion, setNumberQuestion] = useState(
+    exam.numberQuestion || 10
+  );
+  const [reDoTime, setReDoTime] = useState(exam.reDoTime || 0);
+  const [submitTime, setSubmitTime] = useState(exam.submitTime || 10);
+  const [passingQuestion, setPassingQuestion] = useState(
+    exam.passingQuestion || 1
+  );
+  const [topic, setTopic] = useState<string | undefined>(exam.topic.id);
+  const [list, setList] = useState<Topic[]>([]);
+
+console.log(exam);
+
+
+  useEffect(() => {
+    const fetchTopics = async () => {
+      try {
+        const response = await axiosInstance.get("/topic/list");
+        setList(response.data.data.topics || []);
+      } catch (error) {
+        console.error("Failed to fetch topics:", error);
+      }
+    };
+    fetchTopics();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!topic) {
+      alert("Vui lòng chọn chủ đề!");
+      return;
+    }
     if (submitTime < 10) {
       alert("Thời gian làm bài tối thiểu là 10 phút.");
       return;
@@ -29,14 +56,12 @@ export default function EditExamForm({ exam }: EditExamFormProps) {
     }
 
     try {
-      // eslint-disable-next-line no-restricted-globals
       const isConfirmed = confirm("Xác nhận sửa bài thi!");
-      if (!isConfirmed) {
-        return;
-      }
+      if (!isConfirmed) return;
 
       const formData = {
         name,
+        topic_id: topic,
         numberQuestion,
         reDoTime,
         submitTime,
@@ -47,7 +72,7 @@ export default function EditExamForm({ exam }: EditExamFormProps) {
         `/exam/update/${exam.id}`,
         formData
       );
-      alert(response.data.data); // Hiển thị thông báo từ server
+      alert(response.data.data);
       window.location.reload();
     } catch (error: any) {
       alert(error.response.data.error);
@@ -67,7 +92,26 @@ export default function EditExamForm({ exam }: EditExamFormProps) {
           className="border p-1 w-full"
         />
       </div>
-
+      <div>
+        <label className="block mb-2">Chủ Đề</label>
+        <select
+          value={topic}
+          onChange={(e) => setTopic(e.target.value)}
+          required
+          className="border p-1 w-full"
+        >
+          <option value="">Chọn chủ đề</option>
+          {list.length > 0 ? (
+            list.map((topicItem) => (
+              <option key={topicItem.id} value={topicItem.id}>
+                {topicItem.name}
+              </option>
+            ))
+          ) : (
+            <option disabled>Không có chủ đề nào</option>
+          )}
+        </select>
+      </div>
       <div>
         <label className="block mb-2">Số Lượng Câu Hỏi</label>
         <input
@@ -77,10 +121,9 @@ export default function EditExamForm({ exam }: EditExamFormProps) {
           onChange={(e) => setNumberQuestion(Number(e.target.value))}
           required
           className="border p-1 w-full"
-          min={10} // Đặt min là 10 cho input
+          min={10}
         />
       </div>
-
       <div>
         <label className="block mb-2">Số Lần Làm Lại (0: không giới hạn)</label>
         <input
@@ -90,10 +133,9 @@ export default function EditExamForm({ exam }: EditExamFormProps) {
           onChange={(e) => setReDoTime(Number(e.target.value))}
           required
           className="border p-1 w-full"
-          min={0} // reDoTime phải >= 0
+          min={0}
         />
       </div>
-
       <div>
         <label className="block mb-2">Thời Gian Làm Bài (phút)</label>
         <input
@@ -103,10 +145,9 @@ export default function EditExamForm({ exam }: EditExamFormProps) {
           onChange={(e) => setSubmitTime(Number(e.target.value))}
           required
           className="border p-1 w-full"
-          min={10} // Đặt min là 10 cho input
+          min={10}
         />
       </div>
-
       <div>
         <label className="block mb-2">Số Câu Đúng Cần Để Qua Bài</label>
         <input
@@ -116,10 +157,9 @@ export default function EditExamForm({ exam }: EditExamFormProps) {
           onChange={(e) => setPassingQuestion(Number(e.target.value))}
           required
           className="border p-1 w-full"
-          min={1} // Đặt min là 1 cho input
+          min={1}
         />
       </div>
-
       <button
         type="submit"
         className="bg-blue-500 text-white px-4 py-2 rounded"

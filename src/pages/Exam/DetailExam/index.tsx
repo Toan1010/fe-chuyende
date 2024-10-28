@@ -54,7 +54,7 @@ export default function Page() {
           <ExamNavbar onTabSelect={handleTabSelect} />
           <div className="mt-6">
             {activeTab === "questions" && id && <QuestionList id={id} />}
-            {activeTab === "students" && id && <AttendList id={id} />}
+            {activeTab === "students" && id && <AttendList id={exam.slug} />}
           </div>
         </div>
       ) : (

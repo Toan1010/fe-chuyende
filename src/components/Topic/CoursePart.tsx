@@ -1,31 +1,31 @@
-/* eslint-disable no-restricted-globals */
 import { useEffect, useState } from "react";
-import SearchAndLimit from "../../SearchInput";
-import axiosInstance from "../../../configs/axiosConfigs";
-import Pagination from "../../Pagination";
-import { ExamResult } from "../../../interfaces/Exam.interface";
+import { Course } from "../../interfaces/Course.interface";
+import axiosInstance from "../../configs/axiosConfigs";
+import SearchAndLimit from "../SearchInput";
+import Pagination from "../Pagination";
 import { Link } from "react-router-dom";
 
-export default function AttendList({ id }: { id: string }) {
-  const [list, setList] = useState<ExamResult[]>([]);
+export default function CourseTopic({ id }: { id: string }) {
+  const [list, setList] = useState<Course[]>([]);
   const [limit, setLimit] = useState(5);
-  const [totalResults, setTotalResults] = useState<number>(0);
+  const [totalStudents, setTotalStudents] = useState<number>(0);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
-  const fetchResult = async () => {
+  const fetchCourse = async () => {
     try {
-      const response = await axiosInstance.get(`/exam/list-attend/${id}`, {
+      const response = await axiosInstance.get(`/course/list`, {
         params: {
+          topic_id: id,
           limit,
           page,
           key_name: search,
         },
       });
       let data = response.data.data;
-      setList(data.results);
-      setTotalResults(data.count);
+      setList(data.courses); // sửa 'stundents' thành 'students'
+      setTotalStudents(data.count);
       let ttPage = Math.ceil(data.count / limit);
       setTotalPages(ttPage);
     } catch (error: any) {
@@ -34,7 +34,7 @@ export default function AttendList({ id }: { id: string }) {
   };
 
   useEffect(() => {
-    fetchResult();
+    fetchCourse();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, page, search]);
 
@@ -47,7 +47,7 @@ export default function AttendList({ id }: { id: string }) {
   return (
     <div className="max-h-[410px] overflow-y-scroll">
       <h1 className="mb-2 font-bold text-xl">
-        Tổng số bài làm : {totalResults}
+        Tổng số khoá học thuộc chủ đề : {totalStudents}
       </h1>
       <div className="flex items-center justify-between">
         <SearchAndLimit
@@ -57,35 +57,35 @@ export default function AttendList({ id }: { id: string }) {
           setLimit={setLimit}
         />
       </div>
-
       <table className="min-w-full bg-white border border-gray-200">
         <thead className="bg-gray-100 sticky top-0 z-10">
           <tr>
-            <th className="px-4 py-2 border">Mã bài làm </th>
-            <th className="px-4 py-2 border">Mã học sinh</th>
-            <th className="px-4 py-2 border">Học sinh tham gia</th>
-            <th className="px-4 py-2 border">Điểm bài thi</th>
-            <th className="px-4 py-2 border">Số câu trả lời đúng</th>
-            <th className="px-4 py-2 border">Tham gia lúc</th>
-            <th className="px-4 py-2 border">Nộp bài lúc</th>
+            <th className="px-4 py-2 border">STT</th>
+            <th className="px-4 py-2 border">Tên khóa học</th>
+            <th className="px-4 py-2 border">Chủ đề</th>
+            <th className="px-4 py-2 border">Loại khóa học</th>
+            <th className="px-4 py-2 border">Số học sinh đang tham gia</th>
+            <th className="px-4 py-2 border">Ngày khởi tạo</th>
           </tr>
         </thead>
         <tbody>
-          {list.map((item: any, index: number) => (
+          {list.map((item, index) => (
             <tr key={item.id}>
               <td className="px-4 py-1 border text-center">
-                {item.id}
+                {" "}
+                {(page - 1) * limit + index + 1}
               </td>
-              <td className="px-4 py-1 border text-left">{item.student.id}</td>
               <td className="px-4 py-1 border text-left">
-                <Link to={`/student/${item.student.id}`}>
-                  {item.student.fullName}
-                </Link>
+                <Link to={`/course/${item.slug}`}>{item.name}</Link>
               </td>
-              <td className="px-4 py-1 border text-left">{item.point}</td>
-              <td className="px-4 py-1 border text-left">{item.correctAns}</td>
+              <td className="px-4 py-1 border text-left">{item.topic.name}</td>
+              <td className="px-4 py-1 border text-left">
+                {item.type ? "Miễn phí" : "Trả phí"}
+              </td>
+              <td className="px-4 py-1 border text-left">
+                {item.studentCount}
+              </td>
               <td className="px-4 py-1 border text-left">{item.createdAt}</td>
-              <td className="px-4 py-1 border text-left">{item.submitAt}</td>
             </tr>
           ))}
         </tbody>

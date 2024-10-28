@@ -6,8 +6,8 @@ import { Exam } from "../../interfaces/Exam.interface";
 import axiosInstance from "../../configs/axiosConfigs";
 import LoadingSpinner from "../../components/Loading";
 import IndexRow from "../../components/Exam/IndexRow";
-import AddExamFormWithCourseSelection from "../../components/Exam/IndexAddForm";
 import EditExamForm from "../../components/Exam/EditExamForm";
+import AddExamForm from "../../components/Exam/AddExamForm";
 
 export default function Page() {
   const [exams, setExam] = useState<Exam[]>([]);
@@ -23,7 +23,7 @@ export default function Page() {
 
   const handleAddExam = () => {
     setModalTitle("Thêm bài thi");
-    setModalContent(<AddExamFormWithCourseSelection onClose={closeModal} />);
+    setModalContent(<AddExamForm />);
     setIsModalOpen(true);
   };
 
@@ -44,6 +44,8 @@ export default function Page() {
         },
       });
       setExam(response.data.data.exams);
+      console.log(response.data.data.exams);
+      
       setTotalExam(response.data.data.count);
       let ttPage = Math.ceil(response.data.data.count / limit);
       setTotalPages(ttPage);
@@ -58,7 +60,7 @@ export default function Page() {
     fetchExam();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [limit, page, search]);
-  
+
   const handlePageChange = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setPage(newPage);
@@ -108,7 +110,7 @@ export default function Page() {
                 <tr>
                   <th className="px-4 py-2 border">ID</th>
                   <th className="px-4 py-2 border">Tên bài kiểm tra</th>
-                  <th className="px-4 py-2 border">Khóa học</th>
+                  <th className="px-4 py-2 border">Chủ đề</th>
                   <th className="px-4 py-2 border">Số sinh viên đã tham gia</th>
                   <th className="px-4 py-2 border">Thời gian khởi tạo </th>
                   <th className="px-4 py-2 border">Hành động</th>

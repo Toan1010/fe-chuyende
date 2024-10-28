@@ -14,17 +14,11 @@ export default function EditTopicForm({ topic }: { topic: Topic }) {
         name,
         description,
       };
-
-      const response = await axiosInstance.put(
-        `/topic/update/${topic.id}`,
-        formData
-      );
+      await axiosInstance.put(`/topic/update/${topic.id}`, formData);
       alert("Sửa chủ đề thành công!");
       window.location.reload();
     } catch (error: any) {
-
-      alert("Lỗi");
-      alert(error.response.data.error);
+      alert(error?.response.data.error);
     }
   };
 

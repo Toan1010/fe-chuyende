@@ -23,7 +23,7 @@ const ExamList: React.FC<ExamListProps> = ({ course }) => {
       try {
         setLoading(true);
         const response = await axiosInstance.get(
-          `/exam/list?course_slug=${course.slug}`
+          `/exam/list?topic_id=${course.topic.id}`
         );
         setExams(response.data.data.exams);
       } catch (err) {
@@ -38,7 +38,7 @@ const ExamList: React.FC<ExamListProps> = ({ course }) => {
 
   const handleAddExam = () => {
     setModalTitle("Thêm bài thi!");
-    setModalContent(<AddExamForm courseId={course.id} onClose={closeModal} />);
+    setModalContent(<AddExamForm />);
     setIsModalOpen(true);
   };
 

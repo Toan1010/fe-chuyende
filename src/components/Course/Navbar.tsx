@@ -42,7 +42,7 @@ const CourseNavbar: React.FC<CourseNavbarProps> = ({ onTabSelect }) => {
           }`}
           onClick={() => handleTabClick("exams")}
         >
-          Bài thi
+          Bài thi cùng chủ đề
         </li>
         <li
           className={`cursor-pointer pb-2 transition-all ${

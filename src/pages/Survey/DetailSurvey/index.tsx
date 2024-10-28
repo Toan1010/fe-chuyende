@@ -18,7 +18,7 @@ export default function DetailPage() {
 
   useEffect(() => {
     // Lấy tab mặc định từ localStorage nếu có, không thì mặc định là "questions"
-    const defaultTab = localStorage.getItem("activeTab") || "questions";
+    const defaultTab = localStorage.getItem("surveyActiveTab") || "questions";
 
     const fetchCourse = async () => {
       try {
@@ -37,6 +37,7 @@ export default function DetailPage() {
     setActiveTab(defaultTab);
     fetchCourse();
   }, [slug]);
+
   const handleTabSelect = (tab: string) => {
     setActiveTab(tab);
     localStorage.setItem("surveyActiveTab", tab); // Lưu tab đang chọn vào localStorage

@@ -1,9 +1,11 @@
 import { Course } from "./Course.interface";
 import { Student } from "./Student.interface";
+import { Topic } from "./Topic.interface";
 
 export interface Exam {
   id: string;
   name: string;
+  slug: string;
   passingQuestion: number;
   numberQuestion: number;
   reDoTime: number;
@@ -12,6 +14,8 @@ export interface Exam {
   createdAt: string;
   updatedAt: string;
   studentDid: number;
+  topic_id: string;
+  topic: Topic;
 }
 
 export interface ExamQuestion {
