@@ -54,7 +54,7 @@ const LessonList: React.FC<LessonListProps> = ({
       try {
         setLoading(true);
         const response = await axiosInstance.get(
-          `/material/list-lesson/${course.id}`
+          `/material/list-lesson/${course.slug}`
         );
         setLessons(response.data.data.lessons);
       } catch (err) {

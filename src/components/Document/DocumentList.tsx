@@ -27,7 +27,7 @@ const DocumentList: React.FC<ExamListProps> = ({ course }) => {
       try {
         setLoading(true);
         const response = await axiosInstance.get(
-          `/material/list-document/${course.id}`
+          `/material/list-document/${course.slug}`
         );
         setDocs(response.data.data.docs);
       } catch (err) {
