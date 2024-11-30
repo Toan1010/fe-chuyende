@@ -25,8 +25,9 @@ export default function EditQuestionForm({
           correctAns,
         }
       );
-      alert(response.data.message);
-      window.location.reload();
+      console.log(response.data.data);
+
+      alert(response.data.data);
     } catch (error: any) {
       console.error(error);
     }

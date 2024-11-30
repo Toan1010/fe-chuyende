@@ -111,7 +111,6 @@ export default function Page() {
                   <th className="px-4 py-2 border">ID</th>
                   <th className="px-4 py-2 border">Tên bài kiểm tra</th>
                   <th className="px-4 py-2 border">Chủ đề</th>
-                  <th className="px-4 py-2 border">Số sinh viên đã tham gia</th>
                   <th className="px-4 py-2 border">Thời gian khởi tạo </th>
                   <th className="px-4 py-2 border">Hành động</th>
                 </tr>

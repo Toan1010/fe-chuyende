@@ -65,7 +65,7 @@ const LessonList: React.FC<LessonListProps> = ({
     };
 
     fetchLessons();
-  }, [course.id]);
+  }, [course.slug]);
 
   return (
     <div>
